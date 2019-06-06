@@ -4,3 +4,9 @@ spring:
       database: project
       username: admin
       password: admin
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: env, health, httptrace, metrics
