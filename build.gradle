@@ -56,11 +56,12 @@ dependencies {
             'org.jetbrains.kotlin:kotlin-stdlib-jdk8',
             'com.fasterxml.jackson.module:jackson-module-kotlin',
 
-            'org.mongodb:mongo-java-driver:3.10.2',
+            'org.projectlombok:lombok:1.18.8',
 
             'org.springframework.boot:spring-boot-starter',
             'org.springframework.boot:spring-boot-starter-web',
             'org.springframework.boot:spring-boot-starter-actuator',
+            'org.springframework.boot:spring-boot-starter-data-mongodb',
     )
 
     testCompile(
