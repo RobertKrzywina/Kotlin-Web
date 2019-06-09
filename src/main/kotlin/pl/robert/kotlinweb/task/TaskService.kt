@@ -8,7 +8,12 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class TaskService @Autowired constructor(private val repository: TaskRepository) {
 
-    fun save(task: Task): Task = repository.save(task)
+    val validator = TaskValidator()
+
+    fun save(task: Task): Task{
+        validator.checkInputData(task.title, task.details)
+        return repository.save(task)
+    }
 
     fun get(): Iterable<Task> = repository.findAll()
 

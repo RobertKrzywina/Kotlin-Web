@@ -13,6 +13,8 @@ import pl.robert.kotlinweb.task.InMemoryTaskRepository
 
 import java.util.concurrent.ConcurrentHashMap
 
+import pl.robert.kotlinweb.task.exception.InvalidTaskException
+
 @FieldDefaults(level = AccessLevel.PRIVATE)
 class TaskSpec extends Specification {
 
@@ -86,7 +88,7 @@ class TaskSpec extends Specification {
     }
 
     @Unroll
-    def 'Should throw an exception with specified message cause title is null or empty'(String title) {
+    def 'Should throw an exception with specified message cause title is empty or blank'(String title) {
         given: 'initialized obj'
         task.title = title
 
@@ -94,11 +96,11 @@ class TaskSpec extends Specification {
         service.save(task)
 
         then: 'exception is thrown with specified message'
-        thrown Exception
+        InvalidTaskException exception = thrown()
+        exception.message == InvalidTaskException.CAUSE.EMPTY_TITLE.message
 
         where:
         title |_
-        null  |_
         ''    |_
         ' '   |_
     }
@@ -113,7 +115,9 @@ class TaskSpec extends Specification {
         service.save(task)
 
         then: 'exception is thrown with specified message'
-        thrown Exception
+        InvalidTaskException exception = thrown()
+        exception.message == InvalidTaskException.CAUSE.LENGTH_TITLE.message ||
+                             InvalidTaskException.CAUSE.LENGTH_DETAILS.message
 
         where:
         title | details
