@@ -66,4 +66,20 @@ class TaskSpec extends Specification {
         then: 'system has not this task anymore'
         db.isEmpty()
     }
+
+    def 'Should add few tasks and delete all of them'() {
+        when: 'we add few tasks'
+        addTasks()
+
+        and: 'we delete all of them'
+
+        then: 'db should be empty'
+        service.get().isEmpty()
+    }
+
+    private def addTasks() {
+        service.save(new Task(UUID.randomUUID().toString(), '1st', 'Code in Kotlin', false))
+        service.save(new Task(UUID.randomUUID().toString(), '2nd', 'Read java book', false))
+        service.save(new Task(UUID.randomUUID().toString(), '3rd', 'Make dinner', false))
+    }
 }
