@@ -1,13 +1,18 @@
 package pl.robert.kotlinweb.app.task
 
-import pl.robert.kotlinweb.task.InMemoryTaskRepository
-import pl.robert.kotlinweb.task.Task
-import pl.robert.kotlinweb.task.TaskService
 import spock.lang.Shared
 import spock.lang.Specification
 
+import lombok.AccessLevel
+import lombok.experimental.FieldDefaults
+
+import pl.robert.kotlinweb.task.Task
+import pl.robert.kotlinweb.task.TaskService
+import pl.robert.kotlinweb.task.InMemoryTaskRepository
+
 import java.util.concurrent.ConcurrentHashMap
 
+@FieldDefaults(level = AccessLevel.PRIVATE)
 class TaskSpec extends Specification {
 
     @Shared

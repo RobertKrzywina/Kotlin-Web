@@ -1,5 +1,8 @@
 package pl.robert.kotlinweb.task
 
+import lombok.AccessLevel
+import lombok.experimental.FieldDefaults
+
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PutMapping
@@ -11,9 +14,10 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.beans.factory.annotation.Autowired
 
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RestController
 @RequestMapping("api/task")
-class TaskController @Autowired constructor(private val service: TaskService) {
+class TaskController @Autowired constructor(val service: TaskService) {
 
     @PostMapping
     fun save(@RequestBody task: Task): ResponseEntity<Task> = ResponseEntity.ok(service.save(task))
