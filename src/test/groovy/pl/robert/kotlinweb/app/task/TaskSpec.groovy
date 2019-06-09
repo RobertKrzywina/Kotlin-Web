@@ -61,9 +61,9 @@ class TaskSpec extends Specification {
         Task foundTask = service.getById(task.id)
 
         and: 'delete this task'
-        service.delete(foundTask.id)
+        service.deleteById(foundTask.id)
 
-        then: 'system has not this task anymore'
+        then: 'db should be empty'
         db.isEmpty()
     }
 
@@ -72,6 +72,7 @@ class TaskSpec extends Specification {
         addTasks()
 
         and: 'we delete all of them'
+        service.deleteAll()
 
         then: 'db should be empty'
         service.get().isEmpty()

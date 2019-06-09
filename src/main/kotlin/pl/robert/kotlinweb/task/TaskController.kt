@@ -32,5 +32,8 @@ class TaskController @Autowired constructor(val service: TaskService) {
     fun markAsDone(@PathVariable id: String): ResponseEntity<Any> = ResponseEntity.ok(service.markAsDone(id))
 
     @DeleteMapping("{id}")
-    fun delete(@PathVariable id: String): ResponseEntity<Any> = ResponseEntity.ok(service.delete(id))
+    fun delete(@PathVariable id: String): ResponseEntity<Any> = ResponseEntity.ok(service.deleteById(id))
+
+    @DeleteMapping
+    fun delete(): ResponseEntity<Any> = ResponseEntity.ok(service.deleteAll())
 }

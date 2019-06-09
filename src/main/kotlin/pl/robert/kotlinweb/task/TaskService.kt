@@ -18,5 +18,7 @@ class TaskService @Autowired constructor(private val repository: TaskRepository)
         repository.findById(id).get().status = true
     }
 
-    fun delete(id: String) = repository.deleteById(id)
+    fun deleteById(id: String) = repository.deleteById(id)
+
+    fun deleteAll() = repository.deleteAll()
 }

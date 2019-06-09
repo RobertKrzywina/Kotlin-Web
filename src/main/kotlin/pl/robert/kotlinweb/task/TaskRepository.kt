@@ -13,4 +13,6 @@ interface TaskRepository: Repository<Task, String> {
     fun findById(id: String): Optional<Task>
 
     fun deleteById(id: String)
+
+    fun deleteAll()
 }

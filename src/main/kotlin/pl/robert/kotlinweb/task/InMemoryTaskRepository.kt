@@ -29,4 +29,8 @@ class InMemoryTaskRepository(var map: ConcurrentHashMap<String, Task>) : TaskRep
     override fun deleteById(id: String) {
         map.remove(id)
     }
+
+    override fun deleteAll() {
+        map.clear()
+    }
 }
