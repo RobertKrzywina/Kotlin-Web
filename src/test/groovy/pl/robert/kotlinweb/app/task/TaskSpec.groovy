@@ -126,4 +126,13 @@ class TaskSpec extends Specification {
         'ab'                                               | 'abcd'
         'thisIsUnfortunatelyTooLongTitleLengthOfGivenTask' | 'abcde'
     }
+
+    def 'Should throw an exception cause task does not exists'() {
+        when: 'we ask for task by id'
+        service.getById('1234')
+
+        then: 'exception is thrown'
+        InvalidTaskException exception = thrown()
+        exception.message == InvalidTaskException.CAUSE.NOT_EXISTS.message
+    }
 }

@@ -10,6 +10,7 @@ class InvalidTaskException(cause: CAUSE) : RuntimeException(cause.message) {
     enum class CAUSE(val message: String) {
         EMPTY_TITLE("Title is required"),
         LENGTH_TITLE("Title should have from 2 to 45 characters"),
-        LENGTH_DETAILS("Details should have minimum 5 characters")
+        LENGTH_DETAILS("Details should have minimum 5 characters"),
+        NOT_EXISTS("Task does not exists")
     }
 }
