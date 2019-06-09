@@ -2,11 +2,18 @@ spring:
   data:
     mongodb:
       database: project
-      username: admin
-      password: admin
+      host: localhost
 
 management:
   endpoints:
     web:
       exposure:
         include: env, health, httptrace, metrics
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
