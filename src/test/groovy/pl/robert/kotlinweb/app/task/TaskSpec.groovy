@@ -1,5 +1,6 @@
 package pl.robert.kotlinweb.app.task
 
+import spock.lang.Unroll
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -82,5 +83,43 @@ class TaskSpec extends Specification {
         service.save(new Task(UUID.randomUUID().toString(), '1st', 'Code in Kotlin', false))
         service.save(new Task(UUID.randomUUID().toString(), '2nd', 'Read java book', false))
         service.save(new Task(UUID.randomUUID().toString(), '3rd', 'Make dinner', false))
+    }
+
+    @Unroll
+    def 'Should throw an exception with specified message cause title is null or empty'(String title) {
+        given: 'initialized obj'
+        task.title = title
+
+        when: 'we try to create task'
+        service.save(task)
+
+        then: 'exception is thrown with specified message'
+        thrown Exception
+
+        where:
+        title |_
+        null  |_
+        ''    |_
+        ' '   |_
+    }
+
+    @Unroll
+    def 'Should throw an exception with specified message cause invalid length of values'(String title, String details) {
+        given: 'initalized obj'
+        task.title = title
+        task.details = details
+
+        when: 'we try to create task'
+        service.save(task)
+
+        then: 'exception is thrown with specified message'
+        thrown Exception
+
+        where:
+        title | details
+        'a'                                                | 'a'
+        'a'                                                | 'ab'
+        'ab'                                               | 'abcd'
+        'thisIsUnfortunatelyTooLongTitleLengthOfGivenTask' | 'abcde'
     }
 }
