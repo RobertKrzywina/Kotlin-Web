@@ -1,9 +1,7 @@
 package pl.robert.kotlinweb.task
 
-import lombok.NoArgsConstructor
 import pl.robert.kotlinweb.task.exception.InvalidTaskException
 
-@NoArgsConstructor
 class TaskValidator {
 
     fun checkInputData(title: String, details: String) {

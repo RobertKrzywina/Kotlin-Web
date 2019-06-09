@@ -1,13 +1,18 @@
 package pl.robert.kotlinweb.task
 
+import lombok.AccessLevel
+import lombok.experimental.FieldDefaults
+
 import org.springframework.stereotype.Service
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.transaction.annotation.Transactional
+
 import pl.robert.kotlinweb.task.exception.InvalidTaskException
 
 @Service
 @Transactional
-class TaskService @Autowired constructor(private val repository: TaskRepository) {
+@FieldDefaults(level = AccessLevel.PRIVATE)
+class TaskService @Autowired constructor(val repository: TaskRepository) {
 
     val validator = TaskValidator()
 

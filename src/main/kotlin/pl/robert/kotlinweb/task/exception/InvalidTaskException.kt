@@ -1,7 +1,7 @@
 package pl.robert.kotlinweb.task.exception
 
-import lombok.AllArgsConstructor
 import lombok.Getter
+import lombok.AllArgsConstructor
 
 class InvalidTaskException(cause: CAUSE) : RuntimeException(cause.message) {
 

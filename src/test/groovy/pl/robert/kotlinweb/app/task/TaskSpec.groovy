@@ -88,25 +88,25 @@ class TaskSpec extends Specification {
     }
 
     @Unroll
-    def 'Should throw an exception with specified message cause title is empty or blank'(String title) {
+    def 'Should throw an exception with specified message cause title is empty or blank = #title'(String title) {
         given: 'initialized obj'
         task.title = title
 
         when: 'we try to create task'
         service.save(task)
 
-        then: 'exception is thrown with specified message'
+        then: 'exception is thrown'
         InvalidTaskException exception = thrown()
         exception.message == InvalidTaskException.CAUSE.EMPTY_TITLE.message
 
         where:
-        title |_
-        ''    |_
-        ' '   |_
+        title | _
+        ''    | _
+        ' '   | _
     }
 
     @Unroll
-    def 'Should throw an exception with specified message cause invalid length of values'(String title, String details) {
+    def 'Should throw an exception with specified message cause invalid length of values = #title, #details'(String title, String details) {
         given: 'initalized obj'
         task.title = title
         task.details = details
@@ -114,13 +114,13 @@ class TaskSpec extends Specification {
         when: 'we try to create task'
         service.save(task)
 
-        then: 'exception is thrown with specified message'
+        then: 'exception is thrown'
         InvalidTaskException exception = thrown()
         exception.message == InvalidTaskException.CAUSE.LENGTH_TITLE.message ||
-                             InvalidTaskException.CAUSE.LENGTH_DETAILS.message
+                InvalidTaskException.CAUSE.LENGTH_DETAILS.message
 
         where:
-        title | details
+        title                                              | details
         'a'                                                | 'a'
         'a'                                                | 'ab'
         'ab'                                               | 'abcd'
