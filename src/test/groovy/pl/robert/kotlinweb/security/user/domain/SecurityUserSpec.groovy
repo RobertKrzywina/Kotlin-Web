@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults
 import java.util.concurrent.ConcurrentHashMap
 
 import pl.robert.kotlinweb.security.user.domain.dto.UserDto
+import pl.robert.kotlinweb.security.user.domain.exception.InvalidUserException
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 class SecurityUserSpec extends Specification {
@@ -24,7 +25,7 @@ class SecurityUserSpec extends Specification {
     UserDto dto
 
     def setupSpec() {
-        dto = new UserDto("mail@gmail.com", "pass", "John", "Doe")
+        dto = new UserDto("mail@gmail.com", "pass1", "John", "Doe")
         service = new UserService(new InMemoryUserRepository(db))
     }
 
@@ -97,7 +98,11 @@ class SecurityUserSpec extends Specification {
         service.save(dto)
 
         then: 'exception is thrown'
-        RuntimeException exception = thrown()
+        InvalidUserException exception = thrown()
+        exception.message == InvalidUserException.CAUSE.EMPTY_EMAIL.message ||
+                InvalidUserException.CAUSE.EMPTY_PASSWORD.message ||
+                InvalidUserException.CAUSE.EMPTY_FIRST_NAME.message ||
+                InvalidUserException.CAUSE.EMPTY_LAST_NAME.message
 
         where:
         email           | pass    | firstName | lastName
@@ -127,7 +132,10 @@ class SecurityUserSpec extends Specification {
         service.save(dto)
 
         then: 'exception is thrown'
-        RuntimeException exception = thrown()
+        InvalidUserException exception = thrown()
+        exception.message == InvalidUserException.CAUSE.LENGTH_PASSWORD.message ||
+                InvalidUserException.CAUSE.LENGTH_FIRST_NAME.message ||
+                InvalidUserException.CAUSE.LENGTH_LAST_NAME.message
 
         where:
         pass                                              | firstName                             | lastName
@@ -146,7 +154,8 @@ class SecurityUserSpec extends Specification {
         service.save(new UserDto(email, '12345', 'John', 'Doe'))
 
         then: 'exception is thrown'
-        RuntimeException exception = thrown()
+        InvalidUserException exception = thrown()
+        exception.message == InvalidUserException.CAUSE.EMAIL_FORMAT.message
 
         where:
         email                          | _
@@ -159,24 +168,24 @@ class SecurityUserSpec extends Specification {
         '.email@domain.com'            | _
         'email.@domain.com'            | _
         'email..email@domain.com'      | _
-        'あいうえお@domain.com'          | _
+        'あいうえお@domain.com'         | _
         'email@domain.com (Joe Smith)' | _
         'email@domain'                 | _
     }
 
-    @Unroll
-    def 'Should throw an exception cause email need to be unique = [#email]'(String email) {
-        when: 'we try to create an user'
+    def 'Should throw an exception cause email need to be unique'() {
+        when: 'we initialize email'
+        String email = 'john@mail.com'
+
+        and: 'we save user with given email'
         service.save(new UserDto(email, '12345', 'John', 'Doe'))
 
-        then: 'exception is thrown'
-        RuntimeException exception = thrown()
+        and: 'we try to save user again with the same email as before'
+        service.save(new UserDto(email, '54321', 'John', 'Smith'))
 
-        where:
-        email            | _
-        'john@email.com' | _
-        'john@email.com' | _
-        'mike@email.com' | _
+        then: 'exception is thrown'
+        InvalidUserException exception = thrown()
+        exception.message == InvalidUserException.CAUSE.EMAIL_UNIQUE.message
     }
 
     def 'Should throw an exception cause user does not exists'() {
@@ -184,6 +193,7 @@ class SecurityUserSpec extends Specification {
         service.getByEmail('unknown@mail.com')
 
         then: 'exception is thrown'
-        RuntimeException exception = thrown()
+        InvalidUserException exception = thrown()
+        exception.message == InvalidUserException.CAUSE.EMAIL_NOT_EXISTS.message
     }
 }

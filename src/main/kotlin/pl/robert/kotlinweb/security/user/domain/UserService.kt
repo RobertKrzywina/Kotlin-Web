@@ -11,19 +11,25 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 import pl.robert.kotlinweb.security.user.domain.dto.UserDto
 import pl.robert.kotlinweb.security.user.domain.dto.UserDetailsDto
+import pl.robert.kotlinweb.security.user.domain.exception.InvalidUserException
 
 @Service
-@Transactional
 @FieldDefaults(level = AccessLevel.PRIVATE)
 class UserService @Autowired constructor(val repository: UserRepository) : UserDetailsService {
 
     val encoder = BCryptPasswordEncoder()
 
+    @Autowired
+    val validator = UserValidator(repository)
+
     override fun loadUserByUsername(email: String): User {
-        return repository.findByEmail(email).get()
+        return repository
+                .findByEmail(email)
+                .orElseThrow { InvalidUserException(InvalidUserException.CAUSE.EMAIL_NOT_EXISTS) }
     }
 
     fun save(dto: UserDto): User {
+        validator.checkInputData(dto)
         val user = User()
         user.email = dto.email
         user.firstName = dto.firstName
@@ -33,8 +39,11 @@ class UserService @Autowired constructor(val repository: UserRepository) : UserD
         return repository.save(user)
     }
 
+    @Transactional
     fun updateEmail(oldEmail: String, newEmail: String): User {
-        val user = repository.findByEmail(oldEmail).get()
+        val user = repository
+                .findByEmail(oldEmail)
+                .orElseThrow { InvalidUserException(InvalidUserException.CAUSE.EMAIL_NOT_EXISTS) }
 
         user.email = newEmail
 
@@ -57,7 +66,7 @@ class UserService @Autowired constructor(val repository: UserRepository) : UserD
 
     fun getByEmail(email: String): User = repository
             .findByEmail(email)
-            .orElse(null)
+            .orElseThrow { InvalidUserException(InvalidUserException.CAUSE.EMAIL_NOT_EXISTS) }
 
     fun deleteUser(id: String) = repository.deleteById(id)
 
