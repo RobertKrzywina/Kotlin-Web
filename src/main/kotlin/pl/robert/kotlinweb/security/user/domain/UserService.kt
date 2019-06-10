@@ -15,10 +15,10 @@ import pl.robert.kotlinweb.security.user.domain.dto.UserDetailsDto
 @FieldDefaults(level = AccessLevel.PRIVATE)
 class UserService @Autowired constructor(val repository: UserRepository) : UserDetailsService {
 
-    val encoder = BCryptPasswordEncoder(11)
+    val encoder = BCryptPasswordEncoder()
 
     override fun loadUserByUsername(email: String): User {
-        return repository.findOneByEmail(email)
+        return repository.findByEmail(email)
     }
 
     fun save(dto: UserDto): User {
@@ -26,12 +26,13 @@ class UserService @Autowired constructor(val repository: UserRepository) : UserD
         user.email = dto.email
         user.firstName = dto.firstName
         user.lastName = dto.lastName
-        user.pass = dto.pass
+        user.pass = encoder.encode(dto.pass)
+        user.roles = "USER"
         return repository.save(user)
     }
 
     fun updateUser(toSave: User): User {
-        val user = repository.findOneByEmail(toSave.email)
+        val user = repository.findByEmail(toSave.email)
         if (toSave.pass.isNotEmpty()) {
             user.pass = encoder.encode(toSave.password)
         }
@@ -58,4 +59,6 @@ class UserService @Autowired constructor(val repository: UserRepository) : UserD
     }
 
     fun deleteUser(id: String) = repository.deleteById(id)
+
+    fun deleteAll() = repository.deleteAll()
 }

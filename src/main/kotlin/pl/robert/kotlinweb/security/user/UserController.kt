@@ -24,8 +24,8 @@ import pl.robert.kotlinweb.security.user.domain.dto.UserDetailsDto
 @RequestMapping("/api/user")
 class UserController @Autowired constructor(val service: UserService) {
 
-    @PostMapping
-    fun save(dto: UserDto): ResponseEntity<User> = ResponseEntity.ok(service.save(dto))
+    @PostMapping("/save")
+    fun save(@RequestBody dto: UserDto): ResponseEntity<User> = ResponseEntity.ok(service.save(dto))
 
     @GetMapping
     fun get(): ResponseEntity<Iterable<UserDetailsDto>> = ResponseEntity.ok(service.getUsers())
@@ -35,4 +35,7 @@ class UserController @Autowired constructor(val service: UserService) {
 
     @DeleteMapping("{id}")
     fun delete(@PathVariable(name = "id") id: String): ResponseEntity<Any> = ResponseEntity.ok(service.deleteUser(id))
+
+    @DeleteMapping
+    fun deleteAll(): ResponseEntity<Any> = ResponseEntity.ok(service.deleteAll())
 }
