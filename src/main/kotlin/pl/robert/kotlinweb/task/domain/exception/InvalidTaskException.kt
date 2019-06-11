@@ -1,4 +1,4 @@
-package pl.robert.kotlinweb.task.exception
+package pl.robert.kotlinweb.task.domain.exception
 
 import lombok.Getter
 import lombok.AllArgsConstructor

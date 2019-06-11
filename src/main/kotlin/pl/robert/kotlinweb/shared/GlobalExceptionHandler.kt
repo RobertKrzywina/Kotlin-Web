@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 
-import pl.robert.kotlinweb.task.exception.InvalidTaskException
+import pl.robert.kotlinweb.task.domain.exception.InvalidTaskException
 import pl.robert.kotlinweb.security.user.domain.exception.InvalidUserException
 
 @ControllerAdvice

@@ -1,13 +1,13 @@
-package pl.robert.kotlinweb.task
+package pl.robert.kotlinweb.task.domain
 
-import pl.robert.kotlinweb.task.exception.InvalidTaskException
+import pl.robert.kotlinweb.task.domain.exception.InvalidTaskException
 
 class TaskValidator {
 
     fun checkInputData(title: String, details: String) {
         var cause: InvalidTaskException.CAUSE? = null
 
-        if (title.isEmpty() || title.isBlank()) {
+        if (title.isBlank()) {
             cause = InvalidTaskException.CAUSE.EMPTY_TITLE
         } else if (title.length < 2 || title.length > 45) {
             cause = InvalidTaskException.CAUSE.LENGTH_TITLE

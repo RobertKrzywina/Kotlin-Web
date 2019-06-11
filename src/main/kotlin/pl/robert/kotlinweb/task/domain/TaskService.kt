@@ -1,4 +1,4 @@
-package pl.robert.kotlinweb.task
+package pl.robert.kotlinweb.task.domain
 
 import lombok.AccessLevel
 import lombok.experimental.FieldDefaults
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.transaction.annotation.Transactional
 
-import pl.robert.kotlinweb.task.exception.InvalidTaskException
+import pl.robert.kotlinweb.task.domain.exception.InvalidTaskException
 
 @Service
 @Transactional

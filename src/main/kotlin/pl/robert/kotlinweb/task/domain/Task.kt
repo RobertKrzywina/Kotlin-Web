@@ -1,4 +1,4 @@
-package pl.robert.kotlinweb.task
+package pl.robert.kotlinweb.task.domain
 
 import java.util.UUID
 

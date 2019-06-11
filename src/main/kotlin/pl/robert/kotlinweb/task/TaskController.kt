@@ -3,6 +3,9 @@ package pl.robert.kotlinweb.task
 import lombok.AccessLevel
 import lombok.experimental.FieldDefaults
 
+import pl.robert.kotlinweb.task.domain.Task
+import pl.robert.kotlinweb.task.domain.TaskService
+
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PutMapping
@@ -20,20 +23,20 @@ import org.springframework.beans.factory.annotation.Autowired
 class TaskController @Autowired constructor(val service: TaskService) {
 
     @PostMapping
-    fun save(@RequestBody task: Task): ResponseEntity<Task> = ResponseEntity.ok(service.save(task))
+    fun save(@RequestBody task: Task) = ResponseEntity.ok(service.save(task))
 
     @GetMapping
-    fun get(): ResponseEntity<Iterable<Task>> = ResponseEntity.ok(service.get())
+    fun get() = ResponseEntity.ok(service.get())
 
     @GetMapping("{id}")
-    fun getById(@PathVariable id: String): ResponseEntity<Task> = ResponseEntity.ok(service.getById(id))
+    fun getById(@PathVariable id: String) = ResponseEntity.ok(service.getById(id))
 
     @PutMapping("{id}")
-    fun markAsDone(@PathVariable id: String): ResponseEntity<Any> = ResponseEntity.ok(service.markAsDone(id))
+    fun markAsDone(@PathVariable id: String) = ResponseEntity.ok(service.markAsDone(id))
 
     @DeleteMapping("{id}")
-    fun delete(@PathVariable id: String): ResponseEntity<Any> = ResponseEntity.ok(service.deleteById(id))
+    fun delete(@PathVariable id: String) = ResponseEntity.ok(service.deleteById(id))
 
     @DeleteMapping
-    fun delete(): ResponseEntity<Any> = ResponseEntity.ok(service.deleteAll())
+    fun delete() = ResponseEntity.ok(service.deleteAll())
 }

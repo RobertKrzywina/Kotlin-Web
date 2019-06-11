@@ -7,13 +7,9 @@ import spock.lang.Specification
 import lombok.AccessLevel
 import lombok.experimental.FieldDefaults
 
-import pl.robert.kotlinweb.task.Task
-import pl.robert.kotlinweb.task.TaskService
-import pl.robert.kotlinweb.task.InMemoryTaskRepository
-
 import java.util.concurrent.ConcurrentHashMap
 
-import pl.robert.kotlinweb.task.exception.InvalidTaskException
+import pl.robert.kotlinweb.task.domain.exception.InvalidTaskException
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 class TaskSpec extends Specification {
@@ -33,7 +29,7 @@ class TaskSpec extends Specification {
     }
 
     def 'Should add todo task'() {
-        when: 'we add task task'
+        when: 'we add task'
         service.save(task)
 
         then: 'system has this task'
