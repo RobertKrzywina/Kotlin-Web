@@ -17,14 +17,11 @@ class WebSecurityAuthSuccessHandler : SimpleUrlAuthenticationSuccessHandler() {
     override fun onAuthenticationSuccess(request: HttpServletRequest,
                                          response: HttpServletResponse,
                                          authentication: Authentication) {
-        val savedRequest = requestCache.getRequest(request, response)
-        if (savedRequest == null) {
+        if (requestCache.getRequest(request, response) == null) {
             clearAuthenticationAttributes(request)
             return
         }
-        val parameter = request.getParameter(targetUrlParameter)
-        val ok = isAlwaysUseDefaultTargetUrl || targetUrlParameter != null && StringUtils.hasText(parameter)
-        if (ok) {
+        if (isAlwaysUseDefaultTargetUrl || targetUrlParameter != null && StringUtils.hasText(request.getParameter(targetUrlParameter))) {
             requestCache.removeRequest(request, response)
             clearAuthenticationAttributes(request)
             return

@@ -17,8 +17,6 @@ import pl.robert.kotlinweb.security.user.domain.exception.InvalidUserException
 @FieldDefaults(level = AccessLevel.PRIVATE)
 class UserService @Autowired constructor(val repository: UserRepository) : UserDetailsService {
 
-    val encoder = BCryptPasswordEncoder()
-
     @Autowired
     val validator = UserValidator(repository)
 
@@ -34,35 +32,34 @@ class UserService @Autowired constructor(val repository: UserRepository) : UserD
         user.email = dto.email
         user.firstName = dto.firstName
         user.lastName = dto.lastName
-        user.pass = encoder.encode(dto.pass)
+        user.pass = BCryptPasswordEncoder().encode(dto.pass)
         user.roles = "USER"
         return repository.save(user)
     }
 
     @Transactional
-    fun updateEmail(oldEmail: String, newEmail: String): User {
-        val user = repository
-                .findByEmail(oldEmail)
-                .orElseThrow { InvalidUserException(InvalidUserException.CAUSE.EMAIL_NOT_EXISTS) }
+    fun updateEmail(oldEmail: String, newEmail: String): User = repository
+            .findByEmail(oldEmail)
+            .map { user ->
+                user.email = newEmail
+                user
+            }
+            .orElseThrow { InvalidUserException(InvalidUserException.CAUSE.EMAIL_NOT_EXISTS) }
 
-        user.email = newEmail
-
-        return user
-    }
-
-    fun getUsers() = repository.findAll().map {
-        UserDetailsDto(
-                it.id,
-                it.email,
-                it.firstName,
-                it.lastName,
-                it.roles,
-                it.enabled,
-                it.accountNonExpired,
-                it.accountNonLocked,
-                it.credentialsNonExpired
-        )
-    }
+    fun getUsers() = repository.findAll()
+            .map {
+                UserDetailsDto(
+                        it.id,
+                        it.email,
+                        it.firstName,
+                        it.lastName,
+                        it.roles,
+                        it.enabled,
+                        it.accountNonExpired,
+                        it.accountNonLocked,
+                        it.credentialsNonExpired
+                )
+            }
 
     fun getByEmail(email: String): User = repository
             .findByEmail(email)

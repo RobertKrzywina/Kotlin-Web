@@ -17,13 +17,13 @@ class UserValidator @Autowired constructor(val repository: UserRepository) {
     fun checkInputData(dto: UserDto) {
         var cause: InvalidUserException.CAUSE? = null
 
-        if (dto.email.isEmpty() || dto.email.isBlank()) {
+        if (dto.email.isBlank()) {
             cause = InvalidUserException.CAUSE.EMPTY_EMAIL
-        } else if (dto.pass.isEmpty() || dto.pass.isBlank()) {
+        } else if (dto.pass.isBlank()) {
             cause = InvalidUserException.CAUSE.EMPTY_PASSWORD
-        } else if (dto.firstName.isEmpty() || dto.firstName.isBlank()) {
+        } else if (dto.firstName.isBlank()) {
             cause = InvalidUserException.CAUSE.EMPTY_FIRST_NAME
-        } else if (dto.lastName.isEmpty() || dto.lastName.isBlank()) {
+        } else if (dto.lastName.isBlank()) {
             cause = InvalidUserException.CAUSE.EMPTY_LAST_NAME
         } else if (dto.pass.length < 5 || dto.pass.length > 40) {
             cause = InvalidUserException.CAUSE.LENGTH_PASSWORD

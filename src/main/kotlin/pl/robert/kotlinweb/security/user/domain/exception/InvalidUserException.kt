@@ -7,7 +7,7 @@ class InvalidUserException(cause: CAUSE) : RuntimeException(cause.message) {
 
     @Getter
     @AllArgsConstructor
-    enum class CAUSE(val message: String) {
+    enum class CAUSE constructor(val message: String) {
         EMPTY_EMAIL("Email is required"),
         EMPTY_PASSWORD("Password is required"),
         EMPTY_FIRST_NAME("First name is required"),

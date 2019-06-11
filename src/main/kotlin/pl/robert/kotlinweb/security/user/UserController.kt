@@ -14,11 +14,9 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.beans.factory.annotation.Autowired
 
-import pl.robert.kotlinweb.security.user.domain.User
 import pl.robert.kotlinweb.security.user.domain.UserService
-import pl.robert.kotlinweb.security.user.domain.dto.UpdateUserEmailDto
 import pl.robert.kotlinweb.security.user.domain.dto.UserDto
-import pl.robert.kotlinweb.security.user.domain.dto.UserDetailsDto
+import pl.robert.kotlinweb.security.user.domain.dto.UpdateUserEmailDto
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RestController
@@ -26,20 +24,20 @@ import pl.robert.kotlinweb.security.user.domain.dto.UserDetailsDto
 class UserController @Autowired constructor(val service: UserService) {
 
     @PostMapping("/save")
-    fun save(@RequestBody dto: UserDto): ResponseEntity<User> = ResponseEntity.ok(service.save(dto))
+    fun save(@RequestBody dto: UserDto) = ResponseEntity.ok(service.save(dto))
 
     @GetMapping
-    fun get(): ResponseEntity<Iterable<UserDetailsDto>> = ResponseEntity.ok(service.getUsers())
+    fun get() = ResponseEntity.ok(service.getUsers())
 
     @GetMapping("{email}")
-    fun getByEmail(@PathVariable(name = "email") email: String): ResponseEntity<User> = ResponseEntity.ok(service.getByEmail(email))
+    fun getByEmail(@PathVariable(name = "email") email: String) = ResponseEntity.ok(service.getByEmail(email))
 
     @PutMapping
-    fun update(@RequestBody dto: UpdateUserEmailDto): ResponseEntity<User> = ResponseEntity.ok(service.updateEmail(dto.oldEmail, dto.newEmail))
+    fun update(@RequestBody dto: UpdateUserEmailDto) = ResponseEntity.ok(service.updateEmail(dto.oldEmail, dto.newEmail))
 
     @DeleteMapping("{id}")
-    fun delete(@PathVariable(name = "id") id: String): ResponseEntity<Any> = ResponseEntity.ok(service.deleteUser(id))
+    fun delete(@PathVariable(name = "id") id: String) = ResponseEntity.ok(service.deleteUser(id))
 
     @DeleteMapping
-    fun deleteAll(): ResponseEntity<Any> = ResponseEntity.ok(service.deleteAll())
+    fun deleteAll() = ResponseEntity.ok(service.deleteAll())
 }
