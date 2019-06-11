@@ -74,7 +74,7 @@ class TaskSpec extends Specification {
         service.deleteAll()
 
         then: 'db should be empty'
-        service.get().isEmpty()
+        service.getAll().isEmpty()
     }
 
     private def addTasks() {

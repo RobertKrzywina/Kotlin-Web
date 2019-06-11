@@ -46,7 +46,7 @@ class UserService @Autowired constructor(val repository: UserRepository) : UserD
             }
             .orElseThrow { InvalidUserException(InvalidUserException.CAUSE.EMAIL_NOT_EXISTS) }
 
-    fun getUsers() = repository.findAll()
+    fun getAll() = repository.findAll()
             .map {
                 UserDetailsDto(
                         it.id,
@@ -65,7 +65,7 @@ class UserService @Autowired constructor(val repository: UserRepository) : UserD
             .findByEmail(email)
             .orElseThrow { InvalidUserException(InvalidUserException.CAUSE.EMAIL_NOT_EXISTS) }
 
-    fun deleteUser(id: String) = repository.deleteById(id)
+    fun deleteById(id: String) = repository.deleteById(id)
 
     fun deleteAll() = repository.deleteAll()
 }

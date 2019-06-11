@@ -25,7 +25,7 @@ class UserSpec extends Specification {
     UserDto dto
 
     def setupSpec() {
-        dto = new UserDto("mail@gmail.com", "pass1", "John", "Doe")
+        dto = new UserDto('mail@gmail.com', 'pass1', 'John', 'Doe')
         service = new UserService(new InMemoryUserRepository(db))
     }
 
@@ -58,7 +58,7 @@ class UserSpec extends Specification {
         User foundUser = service.getByEmail('new-mail@gmail.com')
 
         and: 'we delete this user'
-        service.deleteUser(foundUser.id)
+        service.deleteById(foundUser.id)
 
         then: 'db should be empty'
         db.isEmpty()
@@ -72,7 +72,7 @@ class UserSpec extends Specification {
         service.deleteAll()
 
         then: 'db should be empty'
-        service.getUsers().isEmpty()
+        service.getAll().isEmpty()
     }
 
     private def addUsers() {

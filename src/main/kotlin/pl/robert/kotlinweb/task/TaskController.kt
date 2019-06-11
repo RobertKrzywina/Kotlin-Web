@@ -26,7 +26,7 @@ class TaskController @Autowired constructor(val service: TaskService) {
     fun save(@RequestBody task: Task) = ResponseEntity.ok(service.save(task))
 
     @GetMapping
-    fun get() = ResponseEntity.ok(service.get())
+    fun getAll() = ResponseEntity.ok(service.getAll())
 
     @GetMapping("{id}")
     fun getById(@PathVariable id: String) = ResponseEntity.ok(service.getById(id))
@@ -35,8 +35,8 @@ class TaskController @Autowired constructor(val service: TaskService) {
     fun markAsDone(@PathVariable id: String) = ResponseEntity.ok(service.markAsDone(id))
 
     @DeleteMapping("{id}")
-    fun delete(@PathVariable id: String) = ResponseEntity.ok(service.deleteById(id))
+    fun deleteById(@PathVariable id: String) = ResponseEntity.ok(service.deleteById(id))
 
     @DeleteMapping
-    fun delete() = ResponseEntity.ok(service.deleteAll())
+    fun deleteAll() = ResponseEntity.ok(service.deleteAll())
 }

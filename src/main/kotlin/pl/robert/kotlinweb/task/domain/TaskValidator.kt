@@ -10,12 +10,10 @@ class TaskValidator {
     fun checkInputData(title: String, details: String) {
         var cause: InvalidTaskException.CAUSE? = null
 
-        if (title.isBlank()) {
-            cause = InvalidTaskException.CAUSE.EMPTY_TITLE
-        } else if (title.length < LENGTH_MIN_TITLE || title.length > LENGTH_MAX_TITLE) {
-            cause = InvalidTaskException.CAUSE.LENGTH_TITLE
-        } else if (details.length < LENGTH_MIN_DETAILS) {
-            cause = InvalidTaskException.CAUSE.LENGTH_DETAILS
+        when {
+            title.isBlank() -> cause = InvalidTaskException.CAUSE.EMPTY_TITLE
+            title.length < LENGTH_MIN_TITLE || title.length > LENGTH_MAX_TITLE -> cause = InvalidTaskException.CAUSE.LENGTH_TITLE
+            details.length < LENGTH_MIN_DETAILS -> cause = InvalidTaskException.CAUSE.LENGTH_DETAILS
         }
 
         if (cause != null) {

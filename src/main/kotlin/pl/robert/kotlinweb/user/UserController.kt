@@ -27,16 +27,16 @@ class UserController @Autowired constructor(val service: UserService) {
     fun save(@RequestBody dto: UserDto) = ResponseEntity.ok(service.save(dto))
 
     @GetMapping
-    fun get() = ResponseEntity.ok(service.getUsers())
+    fun getAll() = ResponseEntity.ok(service.getAll())
 
     @GetMapping("{email}")
     fun getByEmail(@PathVariable(name = "email") email: String) = ResponseEntity.ok(service.getByEmail(email))
 
     @PutMapping
-    fun update(@RequestBody dto: UpdateUserEmailDto) = ResponseEntity.ok(service.updateEmail(dto.oldEmail, dto.newEmail))
+    fun updateEmail(@RequestBody dto: UpdateUserEmailDto) = ResponseEntity.ok(service.updateEmail(dto.oldEmail, dto.newEmail))
 
     @DeleteMapping("{id}")
-    fun delete(@PathVariable(name = "id") id: String) = ResponseEntity.ok(service.deleteUser(id))
+    fun deleteById(@PathVariable(name = "id") id: String) = ResponseEntity.ok(service.deleteById(id))
 
     @DeleteMapping
     fun deleteAll() = ResponseEntity.ok(service.deleteAll())
