@@ -1,4 +1,4 @@
-package pl.robert.kotlinweb.app.task
+package pl.robert.kotlinweb.task.domain
 
 import spock.lang.Unroll
 import spock.lang.Shared

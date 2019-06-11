@@ -6,12 +6,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 
 import pl.robert.kotlinweb.task.exception.InvalidTaskException
+import pl.robert.kotlinweb.security.user.domain.exception.InvalidUserException
 
 @ControllerAdvice
 class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
 
-    @ExceptionHandler(value = [(InvalidTaskException::class)])
-    fun handleInvalidLengthException(exception: InvalidTaskException): ResponseEntity<Any> {
+    @ExceptionHandler(value = [(InvalidTaskException::class), (InvalidUserException::class)])
+    fun handleException(exception: InvalidTaskException): ResponseEntity<Any> {
         return ResponseEntity
                 .badRequest()
                 .body(exception.message)
