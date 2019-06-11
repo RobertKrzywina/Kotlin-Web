@@ -1,4 +1,4 @@
-package pl.robert.kotlinweb.security.user.domain.dto
+package pl.robert.kotlinweb.user.domain.dto
 
 data class UpdateUserEmailDto(
         val oldEmail: String,

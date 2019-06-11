@@ -1,4 +1,4 @@
-package pl.robert.kotlinweb.security.user.domain
+package pl.robert.kotlinweb.user.domain
 
 import spock.lang.Unroll
 import spock.lang.Shared
@@ -9,11 +9,11 @@ import lombok.experimental.FieldDefaults
 
 import java.util.concurrent.ConcurrentHashMap
 
-import pl.robert.kotlinweb.security.user.domain.dto.UserDto
-import pl.robert.kotlinweb.security.user.domain.exception.InvalidUserException
+import pl.robert.kotlinweb.user.domain.dto.UserDto
+import pl.robert.kotlinweb.user.domain.exception.InvalidUserException
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-class SecurityUserSpec extends Specification {
+class UserSpec extends Specification {
 
     @Shared
     UserService service

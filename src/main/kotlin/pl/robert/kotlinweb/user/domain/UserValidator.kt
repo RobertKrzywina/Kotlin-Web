@@ -1,12 +1,12 @@
-package pl.robert.kotlinweb.security.user.domain
+package pl.robert.kotlinweb.user.domain
 
 import java.util.regex.Pattern
 
 import org.springframework.stereotype.Component
 import org.springframework.beans.factory.annotation.Autowired
 
-import pl.robert.kotlinweb.security.user.domain.dto.UserDto
-import pl.robert.kotlinweb.security.user.domain.exception.InvalidUserException
+import pl.robert.kotlinweb.user.domain.dto.UserDto
+import pl.robert.kotlinweb.user.domain.exception.InvalidUserException
 
 @Component
 class UserValidator @Autowired constructor(val repository: UserRepository) {

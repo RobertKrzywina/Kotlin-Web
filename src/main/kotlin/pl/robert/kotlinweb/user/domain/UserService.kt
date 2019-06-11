@@ -1,4 +1,4 @@
-package pl.robert.kotlinweb.security.user.domain
+package pl.robert.kotlinweb.user.domain
 
 import lombok.AccessLevel
 import lombok.experimental.FieldDefaults
@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
-import pl.robert.kotlinweb.security.user.domain.dto.UserDto
-import pl.robert.kotlinweb.security.user.domain.dto.UserDetailsDto
-import pl.robert.kotlinweb.security.user.domain.exception.InvalidUserException
+import pl.robert.kotlinweb.user.domain.dto.UserDto
+import pl.robert.kotlinweb.user.domain.dto.UserDetailsDto
+import pl.robert.kotlinweb.user.domain.exception.InvalidUserException
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)

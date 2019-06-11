@@ -1,4 +1,4 @@
-package pl.robert.kotlinweb.security.user
+package pl.robert.kotlinweb.user
 
 import lombok.AccessLevel
 import lombok.experimental.FieldDefaults
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.beans.factory.annotation.Autowired
 
-import pl.robert.kotlinweb.security.user.domain.UserService
-import pl.robert.kotlinweb.security.user.domain.dto.UserDto
-import pl.robert.kotlinweb.security.user.domain.dto.UpdateUserEmailDto
+import pl.robert.kotlinweb.user.domain.UserService
+import pl.robert.kotlinweb.user.domain.dto.UserDto
+import pl.robert.kotlinweb.user.domain.dto.UpdateUserEmailDto
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RestController

@@ -1,6 +1,8 @@
-package pl.robert.kotlinweb.security.config
+package pl.robert.kotlinweb.security
 
 import java.util.Arrays
+
+import pl.robert.kotlinweb.user.domain.UserService
 
 import org.springframework.context.annotation.Bean
 import org.springframework.security.access.vote.RoleVoter
@@ -19,8 +21,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
-
-import pl.robert.kotlinweb.security.user.domain.UserService
 
 @Configuration
 @EnableWebSecurity

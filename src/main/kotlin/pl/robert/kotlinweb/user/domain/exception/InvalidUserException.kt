@@ -1,4 +1,4 @@
-package pl.robert.kotlinweb.security.user.domain.exception
+package pl.robert.kotlinweb.user.domain.exception
 
 import lombok.Getter
 import lombok.AllArgsConstructor

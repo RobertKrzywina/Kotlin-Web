@@ -1,4 +1,4 @@
-package pl.robert.kotlinweb.security.user.domain
+package pl.robert.kotlinweb.user.domain
 
 import lombok.AccessLevel
 import lombok.experimental.FieldDefaults

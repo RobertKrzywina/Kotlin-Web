@@ -1,4 +1,4 @@
-package pl.robert.kotlinweb.security.config
+package pl.robert.kotlinweb.security
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse

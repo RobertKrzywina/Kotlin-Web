@@ -1,4 +1,4 @@
-package pl.robert.kotlinweb.security.config
+package pl.robert.kotlinweb.security
 
 import org.springframework.util.StringUtils
 import org.springframework.stereotype.Component
