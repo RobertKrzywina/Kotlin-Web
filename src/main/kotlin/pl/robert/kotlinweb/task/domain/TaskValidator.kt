@@ -1,6 +1,9 @@
 package pl.robert.kotlinweb.task.domain
 
 import pl.robert.kotlinweb.task.domain.exception.InvalidTaskException
+import pl.robert.kotlinweb.shared.Constants.Task.Companion.LENGTH_MIN_TITLE
+import pl.robert.kotlinweb.shared.Constants.Task.Companion.LENGTH_MAX_TITLE
+import pl.robert.kotlinweb.shared.Constants.Task.Companion.LENGTH_MIN_DETAILS
 
 class TaskValidator {
 
@@ -9,9 +12,9 @@ class TaskValidator {
 
         if (title.isBlank()) {
             cause = InvalidTaskException.CAUSE.EMPTY_TITLE
-        } else if (title.length < 2 || title.length > 45) {
+        } else if (title.length < LENGTH_MIN_TITLE || title.length > LENGTH_MAX_TITLE) {
             cause = InvalidTaskException.CAUSE.LENGTH_TITLE
-        } else if (details.length < 5) {
+        } else if (details.length < LENGTH_MIN_DETAILS) {
             cause = InvalidTaskException.CAUSE.LENGTH_DETAILS
         }
 
