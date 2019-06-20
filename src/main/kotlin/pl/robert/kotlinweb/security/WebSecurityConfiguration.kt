@@ -1,6 +1,6 @@
 package pl.robert.kotlinweb.security
 
-import java.util.Arrays
+import java.util.Arrays.asList
 
 import pl.robert.kotlinweb.user.domain.UserService
 
@@ -73,7 +73,7 @@ constructor(
 
     @Bean
     fun accessDecisionManager(): AccessDecisionManager {
-        val decisionVoters = Arrays.asList(
+        val decisionVoters = asList(
                 WebExpressionVoter(),
                 RoleVoter(),
                 AuthenticatedVoter()

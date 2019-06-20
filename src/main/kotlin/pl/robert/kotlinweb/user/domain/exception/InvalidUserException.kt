@@ -3,6 +3,8 @@ package pl.robert.kotlinweb.user.domain.exception
 import lombok.Getter
 import lombok.AllArgsConstructor
 
+import pl.robert.kotlinweb.shared.GlobalExceptionHandler
+
 import pl.robert.kotlinweb.shared.Constants.User.Companion.MESSAGE_EMPTY_EMAIL
 import pl.robert.kotlinweb.shared.Constants.User.Companion.MESSAGE_EMAIL_FORMAT
 import pl.robert.kotlinweb.shared.Constants.User.Companion.MESSAGE_EMAIL_UNIQUE
@@ -14,7 +16,8 @@ import pl.robert.kotlinweb.shared.Constants.User.Companion.MESSAGE_EMAIL_NOT_EXI
 import pl.robert.kotlinweb.shared.Constants.User.Companion.MESSAGE_EMPTY_FIRST_NAME
 import pl.robert.kotlinweb.shared.Constants.User.Companion.MESSAGE_LENGTH_FIRST_NAME
 
-class InvalidUserException(cause: CAUSE) : RuntimeException(cause.message) {
+class InvalidUserException(cause: CAUSE) :
+        GlobalExceptionHandler(cause.message, null, false, false) {
 
     @Getter
     @AllArgsConstructor
