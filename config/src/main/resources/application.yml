@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: config
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: /home/robert/IdeaProjects/kotlin-web
+
+server:
+  port: 8081
