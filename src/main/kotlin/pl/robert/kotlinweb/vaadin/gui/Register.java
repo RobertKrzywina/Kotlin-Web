@@ -1,11 +1,16 @@
-package pl.robert.kotlinweb.vaadin;
+package pl.robert.kotlinweb.vaadin.gui;
+
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.theme.lumo.Lumo;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.textfield.TextField;
@@ -14,19 +19,27 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import pl.robert.kotlinweb.user.UserController;
 import pl.robert.kotlinweb.user.domain.dto.UserDto;
+import pl.robert.kotlinweb.vaadin.NotificationService;
 import pl.robert.kotlinweb.shared.GlobalExceptionHandler;
+import pl.robert.kotlinweb.vaadin.PrimitiveAuthentication;
 
 @Route("register")
+@PageTitle("Register")
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class Register extends VerticalLayout {
 
-    private UserController controller;
+    UserController controller;
 
     public Register(UserController controller) {
         this.controller = controller;
 
         setupLayout();
-        addHeader();
-        addForm();
+
+        if (PrimitiveAuthentication.isAuthenticated()) {
+            authorized();
+        } else {
+            unauthorized();
+        }
     }
 
     private void setupLayout() {
@@ -35,8 +48,16 @@ public class Register extends VerticalLayout {
         setAlignItems(Alignment.CENTER);
     }
 
-    private void addHeader() {
+    private void authorized() {
+        add(
+            new H1("You are already logged!"),
+            new Anchor("", "Back to the homepage")
+        );
+    }
+
+    private void unauthorized() {
         add(new H1("Register"));
+        addForm();
     }
 
     private void addForm() {
@@ -66,7 +87,8 @@ public class Register extends VerticalLayout {
             lastName,
             email,
             pass,
-            button
+            button,
+            new Anchor("", "Back to the homepage")
         );
     }
 }
