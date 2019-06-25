@@ -12,6 +12,14 @@ abstract class GlobalExceptionHandler(
         message: String?, cause: Throwable?, enableSuppression: Boolean, writableStackTrace: Boolean) :
         RuntimeException(message, cause, enableSuppression, writableStackTrace) {
 
+    init {
+        label = message
+    }
+
+    companion object {
+        var label: String? = ""
+    }
+
     @ExceptionHandler(value = [(InvalidTaskException::class), (InvalidUserException::class)])
     fun handleException(exception: InvalidTaskException): ResponseEntity<Any> {
         return ResponseEntity
