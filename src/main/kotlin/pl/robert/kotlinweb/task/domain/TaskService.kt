@@ -21,7 +21,7 @@ class TaskService @Autowired constructor(val repository: TaskRepository) {
         return repository.save(task)
     }
 
-    fun getAll(): Iterable<Task> = repository.findAll()
+    fun getAll(): List<Task> = repository.findAll()
 
     fun getById(id: String): Task = repository
             .findById(id)

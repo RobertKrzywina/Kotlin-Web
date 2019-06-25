@@ -8,7 +8,7 @@ interface TaskRepository: Repository<Task, String> {
 
     fun save(task: Task): Task
 
-    fun findAll(): Iterable<Task>
+    fun findAll(): List<Task>
 
     fun findById(id: String): Optional<Task>
 

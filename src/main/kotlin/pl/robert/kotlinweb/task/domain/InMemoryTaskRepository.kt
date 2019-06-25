@@ -4,6 +4,7 @@ import lombok.AccessLevel
 import lombok.experimental.FieldDefaults
 
 import java.util.Optional
+import java.util.stream.Collectors
 import java.util.concurrent.ConcurrentHashMap
 
 import kotlin.collections.HashSet
@@ -16,7 +17,9 @@ class InMemoryTaskRepository(var map: ConcurrentHashMap<String, Task>) : TaskRep
         return task
     }
 
-    override fun findAll(): Iterable<Task> = HashSet(map.values)
+    override fun findAll(): List<Task> = HashSet(map.values)
+            .stream()
+            .collect(Collectors.toList())
 
     override fun findById(id: String): Optional<Task> {
         return map.entries

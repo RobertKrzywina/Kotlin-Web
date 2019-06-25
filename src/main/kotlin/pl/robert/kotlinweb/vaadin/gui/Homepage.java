@@ -40,6 +40,7 @@ public class Homepage extends VerticalLayout {
 
     private void authorized() {
         add(new Anchor("manage-users", "Manage users"));
+        add(new Anchor("manage-tasks", "Manage tasks"));
         logoutBtn();
     }
 
