@@ -8,9 +8,10 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.button.Button;
-import pl.robert.kotlinweb.vaadin.PrimitiveAuthentication;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+
+import pl.robert.kotlinweb.vaadin.PrimitiveAuthentication;
 
 @Route("")
 @PageTitle("Homepage")
@@ -38,6 +39,7 @@ public class Homepage extends VerticalLayout {
     }
 
     private void authorized() {
+        add(new Anchor("manage-users", "Manage users"));
         logoutBtn();
     }
 
