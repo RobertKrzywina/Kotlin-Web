@@ -68,6 +68,7 @@ public class ManageUsers extends VerticalLayout {
         button.addClickListener(e -> {
             String id = service.getByEmail(PrimitiveAuthentication.email).getId();
             service.deleteAllExceptGivenId(id);
+            UI.getCurrent().getPage().reload();
         });
 
         add(

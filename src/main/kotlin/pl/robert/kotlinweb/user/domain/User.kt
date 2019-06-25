@@ -3,7 +3,6 @@ package pl.robert.kotlinweb.user.domain
 import java.util.UUID
 
 import lombok.AccessLevel
-import lombok.EqualsAndHashCode
 import lombok.NoArgsConstructor
 import lombok.experimental.FieldDefaults
 
@@ -19,7 +18,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 @Document
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
-@EqualsAndHashCode
 open class User : UserDetails {
 
     @Id

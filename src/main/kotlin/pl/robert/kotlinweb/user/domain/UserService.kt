@@ -69,8 +69,7 @@ class UserService @Autowired constructor(val repository: UserRepository) : UserD
 
     fun deleteAll() = repository.deleteAll()
 
-    fun deleteAllExceptGivenId(id: String) = repository
-            .findAll()
+    fun deleteAllExceptGivenId(id: String) = repository.findAll()
             .filter { user -> user.id != id }
             .forEach { user -> repository.deleteById(user.id) }
 }
